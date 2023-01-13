@@ -11,7 +11,7 @@
         </q-card-section>
 
         <q-card-section>
-          <div class="row q-col-gutter-md">
+          <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
                 Nama <span class="text-red">*</span>
@@ -21,6 +21,7 @@
                 outlined
                 lazy-rules
                 v-model="form.nama"
+                :disable="disableForm"
                 :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
               />
             </div>
@@ -35,6 +36,7 @@
                 type="number"
                 v-model="form.nik"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[
                   (val) => (val && val.length > 0) || 'Wajib diisi',
                   (val) =>
@@ -45,7 +47,7 @@
             </div>
           </div>
 
-          <div class="row q-col-gutter-md">
+          <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
                 Tempat Lahir <span class="text-red">*</span>
@@ -55,6 +57,7 @@
                 outlined
                 v-model="form.tempatLahir"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
               />
             </div>
@@ -68,6 +71,7 @@
                 outlined
                 v-model="form.tanggalLahir"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
               >
                 <template v-slot:append>
@@ -94,7 +98,7 @@
             </div>
           </div>
 
-          <div class="row q-col-gutter-md">
+          <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
                 Jenis Kelamin <span class="text-red">*</span>
@@ -109,25 +113,27 @@
                 v-model="form.jenisKelamin"
                 :options="optionGender"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
               />
             </div>
 
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
-                Pendidikan Terakhir <span class="tex-red">*</span>
+                Pendidikan Terakhir <span class="text-red">*</span>
               </div>
               <q-input
                 ref="pendidikan_terakhir"
                 outlined
                 v-model="form.pendidikanTerakhir"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
               />
             </div>
           </div>
 
-          <div class="row q-col-gutter-md">
+          <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
                 Nomor Telepon <span class="text-red">*</span>
@@ -138,17 +144,18 @@
                 outlined
                 v-model="form.noTelp"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
               />
             </div>
 
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">Email</div>
-              <q-input outlined v-model="form.email" />
+              <q-input outlined v-model="form.email" :disable="disableForm" />
             </div>
           </div>
 
-          <div class="row q-col-gutter-md">
+          <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
                 Provinsi <span class="text-red">*</span>
@@ -156,13 +163,16 @@
               <q-select
                 ref="provinsi"
                 outlined
+                use-input
                 option-label="nama"
                 option-value="id"
                 v-model="form.prov"
                 :options="optionProvinsi"
                 @input="onSelectKab"
+                @filter="filterProvinsi"
                 :loading="loadingProv"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[
                   (val) => (val && val.nama.length > 0) || 'Wajib diisi',
                 ]"
@@ -179,18 +189,21 @@
 
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
-                Kabupaten <span class="text-red">*</span>
+                Kota/Kabupaten <span class="text-red">*</span>
               </div>
               <q-select
                 ref="kabupaten"
                 outlined
+                use-input
                 option-label="nama"
                 option-value="id"
                 v-model="form.kab"
-                :options="optionKab"
+                :options="optionKabupaten"
                 @input="onSelectKec"
+                @filter="filterKabupaten"
                 :loading="loadingKab"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[
                   (val) => (val && val.nama.length > 0) || 'Wajib diisi',
                 ]"
@@ -206,7 +219,7 @@
             </div>
           </div>
 
-          <div class="row q-col-gutter-md">
+          <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
                 Kecamatan <span class="text-red">*</span>
@@ -214,13 +227,16 @@
               <q-select
                 ref="kecamatan"
                 outlined
+                use-input
                 option-label="nama"
                 option-value="id"
                 v-model="form.kec"
                 :options="optionKec"
                 @input="onSelectKel"
+                @filter="filterkecamatan"
                 :loading="loadingKec"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[
                   (val) => (val && val.nama.length > 0) || 'Wajib diisi',
                 ]"
@@ -237,17 +253,20 @@
 
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
-                Kelurahan <span class="text-red">*</span>
+                Kelurahan/Desa <span class="text-red">*</span>
               </div>
               <q-select
                 ref="kelurahan"
                 outlined
+                use-input
                 option-label="nama"
                 option-value="id"
                 v-model="form.kel"
                 :options="optionKel"
                 :loading="loadingKel"
+                @filter="filterKelurahan"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[
                   (val) => (val && val.nama.length > 0) || 'Wajib diisi',
                 ]"
@@ -262,8 +281,8 @@
               </q-select>
             </div>
 
-            <div class="col-12 col-md">
-              <div class="row q-gutter-md">
+            <div class="col-12 col-md-3">
+              <div class="row q-gutter-sm">
                 <div class="col">
                   <div class="text-sm font-semibold">
                     RT <span class="text-red">*</span>
@@ -274,6 +293,7 @@
                     type="number"
                     v-model="form.rt"
                     lazy-rules
+                    :disable="disableForm"
                     :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
                   />
                 </div>
@@ -287,6 +307,7 @@
                     type="number"
                     v-model="form.rw"
                     lazy-rules
+                    :disable="disableForm"
                     :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
                   />
                 </div>
@@ -294,25 +315,33 @@
             </div>
           </div>
 
-          <div class="row q-col-gutter-md">
+          <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">Facebook</div>
-              <q-input outlined v-model="form.facebook" />
+              <q-input
+                outlined
+                v-model="form.facebook"
+                :disable="disableForm"
+              />
             </div>
 
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">Twitter</div>
-              <q-input outlined v-model="form.twitter" />
+              <q-input outlined v-model="form.twitter" :disable="disableForm" />
             </div>
 
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">Instagram</div>
-              <q-input outlined v-model="form.instagram" />
+              <q-input
+                outlined
+                v-model="form.instagram"
+                :disable="disableForm"
+              />
             </div>
 
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">Tiktok</div>
-              <q-input outlined v-model="form.tiktok" />
+              <q-input outlined v-model="form.tiktok" :disable="disableForm" />
             </div>
           </div>
 
@@ -326,21 +355,35 @@
                 outlined
                 v-model="form.alamat"
                 lazy-rules
+                :disable="disableForm"
                 :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
               />
             </div>
           </div>
         </q-card-section>
 
-        <q-card-section class="q-pt-xs">
+        <q-card-section class="q-pt-none">
           <q-btn
+            v-if="disableForm == false"
             class="full-width"
             color="primary"
             label="Submit"
             @click="onSubmit"
           />
+
+          <q-btn
+            v-if="disableForm == true"
+            class="full-width"
+            color="primary"
+            label="Tambah Baru"
+            @click="onTambah"
+          />
         </q-card-section>
       </q-card>
+
+      <div class="q-pt-md">
+        <data-check />
+      </div>
     </div>
     <recaptcha-vue />
   </q-page>
@@ -348,13 +391,17 @@
 
 <script>
 import RecaptchaVue from "src/components/Recaptcha.vue";
+import DataCheck from "src/components/DataCheck.vue";
+import DialogConfirm from "src/components/DialogConfirm.vue";
 
 export default {
   components: {
     RecaptchaVue,
+    DataCheck,
   },
   data() {
     return {
+      disableForm: false,
       loadingProv: false,
       loadingKab: false,
       loadingKec: false,
@@ -370,9 +417,13 @@ export default {
         },
       ],
       optionProvinsi: [],
-      optionKab: [],
+      optionProvinsiFilter: [],
+      optionKabupaten: [],
+      optionKabupatenFilter: [],
       optionKec: [],
+      optionKecFilter: [],
       optionKel: [],
+      optionKelFilter: [],
       form: {
         nama: "",
         nik: "",
@@ -400,12 +451,72 @@ export default {
     this.getDataProvinsi();
   },
   methods: {
+    filterProvinsi(val, update) {
+      if (val === "") {
+        update(() => {
+          this.optionProvinsi = [...this.optionProvinsiFilter];
+        });
+        return;
+      }
+
+      update(() => {
+        const needle = val.toLowerCase();
+        this.optionProvinsi = this.optionProvinsiFilter.filter(
+          (v) => v.nama.toLowerCase().indexOf(needle) > -1
+        );
+      });
+    },
+    filterKabupaten(val, update) {
+      if (val === "") {
+        update(() => {
+          this.optionKabupaten = [...this.optionKabupatenFilter];
+        });
+        return;
+      }
+
+      update(() => {
+        const needle = val.toLowerCase();
+        this.optionKabupaten = this.optionKabupatenFilter.filter(
+          (v) => v.nama.toLowerCase().indexOf(needle) > -1
+        );
+      });
+    },
+    filterkecamatan(val, update) {
+      if (val === "") {
+        update(() => {
+          this.optionKec = [...this.optionKecFilter];
+        });
+        return;
+      }
+
+      update(() => {
+        const needle = val.toLowerCase();
+        this.optionKec = this.optionKecFilter.filter(
+          (v) => v.nama.toLowerCase().indexOf(needle) > -1
+        );
+      });
+    },
+    filterKelurahan(val, update) {
+      if (val === "") {
+        update(() => {
+          this.optionKel = [...this.optionKelFilter];
+        });
+        return;
+      }
+
+      update(() => {
+        const needle = val.toLowerCase();
+        this.optionKel = this.optionKelFilter.filter(
+          (v) => v.nama.toLowerCase().indexOf(needle) > -1
+        );
+      });
+    },
     getDataProvinsi() {
       this.loadingProv = true;
 
       this.$axios.post("provinsi/showall").then(({ data }) => {
         this.loadingProv = false;
-        this.optionProvinsi = data.data;
+        this.optionProvinsiFilter = data.data;
       });
     },
     onSelectKab() {
@@ -416,7 +527,7 @@ export default {
         this.loadingKab = false;
         let dataKab = data.data.filter((i) => i.provinsi_id == idProv);
 
-        this.optionKab = dataKab;
+        this.optionKabupatenFilter = dataKab;
       });
     },
     onSelectKec() {
@@ -427,7 +538,7 @@ export default {
         this.loadingKec = false;
         let dataKec = data.data.filter((i) => i.kabkot_id == idKab);
 
-        this.optionKec = dataKec;
+        this.optionKecFilter = dataKec;
       });
     },
     onSelectKel() {
@@ -438,34 +549,10 @@ export default {
         this.loadingKel = false;
         let dataKel = data.data.filter((i) => i.kecamatan_id == idKec);
 
-        this.optionKel = dataKel;
+        this.optionKelFilter = dataKel;
       });
     },
     onSubmit() {
-      let form = this.form;
-
-      let params = {
-        nama: form.nama,
-        nik: form.nik,
-        tempat_lahir: form.tempatLahir,
-        tanggal_lahir: form.tanggalLahir,
-        jenis_kelamin: form.jenisKelamin,
-        pendidikan_akhir: form.pendidikanTerakhir,
-        nomor_telepon: form.noTelp,
-        email: form.email,
-        provinsi: form.prov.nama,
-        kota_kabupaten: form.kab.nama,
-        kecamatan: form.kec.nama,
-        kelurahan_desa: form.kel.nama,
-        rt: form.rt,
-        rw: form.rw,
-        facebook: form.facebook,
-        twitter: form.twitter,
-        instagram: form.instagram,
-        tiktok: form.tiktok,
-        alamat: form.alamat,
-      };
-
       this.$refs.nama.validate();
       this.$refs.nik.validate();
       this.$refs.tempat_lahir.validate();
@@ -482,41 +569,130 @@ export default {
       this.$refs.alamat.validate();
 
       if (
-        this.$refs.nama.hasError &&
-        this.$refs.nik.hasError &&
-        this.$refs.tempat_lahir.hasError &&
-        this.$refs.tanggal_lahir.hasError &&
-        this.$refs.jenis_kelamin.hasError &&
-        this.$refs.pendidikan_terakhir.hasError &&
-        this.$refs.nomor_telp.hasError &&
-        this.$refs.provinsi.hasError &&
-        this.$refs.kabupaten.hasError &&
-        this.$refs.kecamatan.hasError &&
-        this.$refs.kelurahan.hasError &&
-        this.$refs.rt.hasError &&
-        this.$refs.rw.hasError &&
+        this.$refs.nama.hasError ||
+        this.$refs.nik.hasError ||
+        this.$refs.tempat_lahir.hasError ||
+        this.$refs.tanggal_lahir.hasError ||
+        this.$refs.jenis_kelamin.hasError ||
+        this.$refs.pendidikan_terakhir.hasError ||
+        this.$refs.nomor_telp.hasError ||
+        this.$refs.provinsi.hasError ||
+        this.$refs.kabupaten.hasError ||
+        this.$refs.kecamatan.hasError ||
+        this.$refs.kelurahan.hasError ||
+        this.$refs.rt.hasError ||
+        this.$refs.rw.hasError ||
         this.$refs.alamat.hasError
       ) {
         this.formHasError = true;
       } else {
-        this.$axios.post("/relawan/new", params).then(({ data }) => {
-          let success = data.data.success;
+        let form = this.form;
 
-          if (!success) {
-            this.$q.dialog({
-              color: "negative",
-              message: "Terjadi kesalahan pada isian form",
-              icon: "close",
-            });
-          } else {
-            this.$q.dialog({
-              color: "positive",
-              message: "Data berhasil di simpan",
-              icon: "cloud_upload",
-            });
-          }
-        });
+        let formattedNoTelp = form.noTelp;
+
+        if (form.noTelp.slice(0, 1) == "0") {
+          formattedNoTelp = "62" + form.noTelp.substring(1);
+        } else if (form.noTelp.slice(0, 2) == "62") {
+          formattedNoTelp = "62" + form.noTelp.substring(2);
+        } else {
+          formattedNoTelp = "62" + form.noTelp;
+        }
+
+        let items = {
+          nama: form.nama.toUpperCase(),
+          nik: form.nik,
+          tempat_lahir: form.tempatLahir.toUpperCase(),
+          tanggal_lahir: form.tanggalLahir,
+          jenis_kelamin: form.jenisKelamin,
+          pendidikan_akhir: form.pendidikanTerakhir.toUpperCase(),
+          nomor_telepon: formattedNoTelp,
+          email: form.email,
+          provinsi: form.prov.nama,
+          kota_kabupaten: form.kab.nama,
+          kecamatan: form.kec.nama,
+          kelurahan_desa: form.kel.nama,
+          rt: form.rt,
+          rw: form.rw,
+          facebook: form.facebook,
+          twitter: form.twitter,
+          instagram: form.instagram,
+          tiktok: form.tiktok,
+          alamat: form.alamat.toUpperCase(),
+        };
+
+        this.$q
+          .dialog({
+            message: "Pastikan data yang telah diisi telah sesuai",
+            component: DialogConfirm,
+            parent: this,
+            items: items,
+            persistent: true,
+          })
+          .onOk((data) => {
+            this.confirmSubmit(data);
+          });
       }
+    },
+    confirmSubmit(data) {
+      this.$axios.post("/relawan/new", data).then(({ data }) => {
+        let success = data.success;
+
+        if (success == true) {
+          this.disableForm = true;
+          this.$q.notify({
+            message: "Data berhasil disimpan",
+            color: "positive",
+            icon: "cloud_upload",
+          });
+        } else {
+          this.disableForm = false;
+          this.$q.notify({
+            message: "Gagal menyimpan data!",
+            color: "negative",
+            icon: "close",
+          });
+        }
+      });
+    },
+    onTambah() {
+      this.disableForm = false;
+
+      this.form = {
+        nama: "",
+        nik: "",
+        tempatLahir: "",
+        tanggalLahir: "",
+        jenisKelamin: "",
+        pendidikanTerakhir: "",
+        noTelp: "",
+        email: "",
+        prov: "",
+        kab: "",
+        kec: "",
+        kel: "",
+        rt: "",
+        rw: "",
+        facebook: "",
+        twitter: "",
+        instagram: "",
+        tiktok: "",
+        alamat: "",
+      };
+
+      this.$refs.nama.resetValidation();
+      this.$refs.nik.resetValidation();
+      this.$refs.tempat_lahir.resetValidation();
+      this.$refs.tanggal_lahir.resetValidation();
+      this.$refs.jenis_kelamin.resetValidation();
+      this.$refs.pendidikan_terakhir.resetValidation();
+      this.$refs.nomor_telp.resetValidation();
+      this.$refs.provinsi.resetValidation();
+      this.$refs.kabupaten.resetValidation();
+      this.$refs.kecamatan.resetValidation();
+      this.$refs.kelurahan.resetValidation();
+      this.$refs.rt.resetValidation();
+      this.$refs.rw.resetValidation();
+      this.$refs.alamat.resetValidation();
     },
   },
 };
