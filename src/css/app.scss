@@ -1,0 +1,43 @@
+// app global css in SCSS form
+@import "screens";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap");
+
+html,
+body {
+  background: #dcdcdc;
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  margin-left: 0.125rem;
+  margin-right: 0.125rem;
+
+  @media (min-width: $medium) {
+    margin-left: 15rem;
+    margin-right: 15rem;
+  }
+}
+
+.bg-home {
+  background-image: url("~assets/wallpaper-relawan.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  color: white;
+}
+
+.glass {
+  background: rgba(122, 70, 70, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  /* From https://css.glass */
+  // background: rgba(231, 218, 218, 0.09);
+  // border-radius: 16px;
+  // box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  // backdrop-filter: blur(4px);
+  // -webkit-backdrop-filter: blur(4px);
+  // border: 1px solid rgba(231, 218, 218, 0.81);
+}
