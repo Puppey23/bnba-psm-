@@ -155,6 +155,22 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-12 col-md">
+              <div class="text-sm font-semibold">
+                Alamat <span class="text-red">*</span>
+              </div>
+              <q-input
+                ref="alamat"
+                outlined
+                v-model="form.alamat"
+                lazy-rules
+                :disable="disableForm"
+                :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
+              />
+            </div>
+          </div>
+
           <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
               <div class="text-sm font-semibold">
@@ -344,22 +360,6 @@
               <q-input outlined v-model="form.tiktok" :disable="disableForm" />
             </div>
           </div>
-
-          <div class="row q-pt-md">
-            <div class="col-12 col-md">
-              <div class="text-sm font-semibold">
-                Alamat <span class="text-red">*</span>
-              </div>
-              <q-input
-                ref="alamat"
-                outlined
-                v-model="form.alamat"
-                lazy-rules
-                :disable="disableForm"
-                :rules="[(val) => (val && val.length > 0) || 'Wajib diisi']"
-              />
-            </div>
-          </div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
@@ -393,6 +393,7 @@
 import RecaptchaVue from "src/components/Recaptcha.vue";
 import DataCheck from "src/components/DataCheck.vue";
 import DialogConfirm from "src/components/DialogConfirm.vue";
+import DialogNotify from "src/components/DialogNotify.vue";
 
 export default {
   components: {
@@ -636,21 +637,26 @@ export default {
     confirmSubmit(data) {
       this.$axios.post("/relawan/new", data).then(({ data }) => {
         let success = data.success;
-
         if (success == true) {
           this.disableForm = true;
-          this.$q.notify({
-            message: "Data berhasil disimpan",
-            color: "positive",
-            icon: "cloud_upload",
-          });
+          setTimeout(() => {
+            this.$q.dialog({
+              title: "Sukses",
+              message: "Data berhasil disimpan",
+              component: DialogNotify,
+              parent: this,
+            });
+          }, 3000);
         } else {
           this.disableForm = false;
-          this.$q.notify({
-            message: "Gagal menyimpan data!",
-            color: "negative",
-            icon: "close",
-          });
+          setTimeout(() => {
+            this.$q.dialog({
+              title: "Gagal",
+              message: "Data tidak berhasil disimpan",
+              component: DialogNotify,
+              parent: this,
+            });
+          }, 3000);
         }
       });
     },
