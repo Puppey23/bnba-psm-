@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div id="g-recaptcha"></div>
 </template>
 
 <script>
@@ -8,9 +8,21 @@ export default {
     let recaptchaScript = document.createElement("script");
     recaptchaScript.setAttribute(
       "src",
-      "https://www.google.com/recaptcha/api.js?render=6LfPmvQjAAAAAHpC2mwyxsnT2FLPNQV3gITJku9M"
+      "https://www.google.com/recaptcha/api.js"
     );
     document.head.appendChild(recaptchaScript);
+
+    setTimeout(() => {
+      window.grecaptcha.render("g-recaptcha", {
+        sitekey: "6LcIvQAkAAAAANNzNE_E3M24CjU1rhcvZiP_w8wy",
+        callback: this.verifyRecaptcha,
+      });
+    }, 200);
+  },
+  methods: {
+    verifyRecaptcha(response) {
+      this.$emit("on-validate", response);
+    },
   },
 };
 </script>

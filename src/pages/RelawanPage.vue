@@ -363,6 +363,14 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none">
+          <div class="q-pb-sm">
+            <recaptcha @on-validate="onValidateCaptcha" />
+          </div>
+
+          <div v-if="grecaptcha.error">
+            <div class="text-red font-semibold">Pastikan anda bukan robot</div>
+          </div>
+
           <q-btn
             v-if="disableForm == false"
             class="full-width"
@@ -385,20 +393,19 @@
         <data-check />
       </div>
     </div>
-    <recaptcha-vue />
   </q-page>
 </template>
 
 <script>
-import RecaptchaVue from "src/components/Recaptcha.vue";
 import DataCheck from "src/components/DataCheck.vue";
 import DialogConfirm from "src/components/DialogConfirm.vue";
 import DialogNotify from "src/components/DialogNotify.vue";
+import Recaptcha from "src/components/Recaptcha.vue";
 
 export default {
   components: {
-    RecaptchaVue,
     DataCheck,
+    Recaptcha,
   },
   data() {
     return {
@@ -446,12 +453,19 @@ export default {
         tiktok: "",
         alamat: "",
       },
+      grecaptcha: {
+        error: false,
+        response: null,
+      },
     };
   },
   mounted() {
     this.getDataProvinsi();
   },
   methods: {
+    verifyMethod(response) {
+      this.grecaptcha.response = response;
+    },
     filterProvinsi(val, update) {
       if (val === "") {
         update(() => {
@@ -587,6 +601,8 @@ export default {
       ) {
         this.formHasError = true;
       } else {
+        this.captcha = true;
+
         let form = this.form;
 
         let formattedNoTelp = form.noTelp;
@@ -630,6 +646,12 @@ export default {
             persistent: true,
           })
           .onOk((data) => {
+            this.grecaptcha.error = false;
+
+            if (!this.grecaptcha.response) {
+              return (this.grecaptcha.error = true);
+            }
+
             this.confirmSubmit(data);
           });
       }
@@ -659,6 +681,9 @@ export default {
           }, 3000);
         }
       });
+    },
+    onValidateCaptcha(response) {
+      this.grecaptcha.response = response;
     },
     onTambah() {
       this.disableForm = false;
