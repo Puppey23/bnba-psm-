@@ -2,12 +2,17 @@
   <q-page class="q-pa-md">
     <div class="container">
       <q-card>
-        <q-card-section class="bg-primary">
-          <div class="text-center text-3xl text-white">FORM DATA BNBA</div>
-
-          <div class="text-center text-lg text-white">
-            PEKERJA SOSIAL MASYARAKAT (PSM)
-          </div>
+        <q-card-section class="bg-psm">
+          <q-item>
+            <q-item-section class="text-center">
+              <q-item-label class="text-white text-lg">
+                FORM DATA
+              </q-item-label>
+              <q-item-label class="text-white text-3xl">
+                PEKERJA SOSIAL MASYARAKAT
+              </q-item-label>
+            </q-item-section>
+          </q-item>
         </q-card-section>
 
         <q-card-section>
@@ -360,6 +365,15 @@
               <q-input outlined v-model="form.tiktok" :disable="disableForm" />
             </div>
           </div>
+
+          <div class="row q-pt-md">
+            <div
+              class="text-xs text-blue font-bold cursor-pointer"
+              @click="onShowPanduan"
+            >
+              Panduan Pengisian Sosial Media
+            </div>
+          </div>
         </q-card-section>
 
         <q-card-section class="q-pt-none">
@@ -374,7 +388,7 @@
           <q-btn
             v-if="disableForm == false"
             class="full-width"
-            color="primary"
+            color="green-10"
             label="Submit"
             @click="onSubmit"
           />
@@ -382,7 +396,7 @@
           <q-btn
             v-if="disableForm == true"
             class="full-width"
-            color="primary"
+            color="green-10"
             label="Tambah Baru"
             @click="onTambah"
           />
@@ -400,6 +414,7 @@
 import DataCheck from "src/components/DataCheck.vue";
 import DialogConfirm from "src/components/DialogConfirm.vue";
 import DialogNotify from "src/components/DialogNotify.vue";
+import DialogPanduan from "src/components/DialogPanduan.vue";
 import Recaptcha from "src/components/Recaptcha.vue";
 
 export default {
@@ -465,6 +480,14 @@ export default {
   methods: {
     verifyMethod(response) {
       this.grecaptcha.response = response;
+    },
+    onShowPanduan() {
+      this.$q.dialog({
+        title: "Panduan Pengisian",
+        component: DialogPanduan,
+        parent: this,
+        persisntent: true,
+      });
     },
     filterProvinsi(val, update) {
       if (val === "") {

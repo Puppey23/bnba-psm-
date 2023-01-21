@@ -31,7 +31,7 @@ export default function (/* { store, ssrContext } */) {
     if (to.matched.some((record) => record.meta.auth)) {
       if (Cookies.get("token") === null || Cookies.get("token") === undefined) {
         next({
-          path: "/home",
+          path: "/psm",
         });
         Notify.create({
           color: "negative",

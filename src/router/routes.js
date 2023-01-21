@@ -7,18 +7,19 @@ const auth = {
 const routes = [
   {
     path: "/",
-    redirect: "/home",
+    redirect: "/psm",
   },
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/Index.vue") },
-      { path: "home", component: () => import("pages/HomePage.vue") },
+      { path: "psm", component: () => import("pages/PsmPage.vue") },
+      { path: "kim", component: () => import("pages/KimPage.vue") },
       {
-        path: "form-bnba-psm",
+        path: "form-page",
         ...auth,
-        component: () => import("pages/RelawanPage.vue"),
+        component: () => import("pages/FormPage.vue"),
       },
     ],
   },

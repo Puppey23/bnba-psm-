@@ -3,8 +3,8 @@ import axios from "axios";
 import { Cookies } from "quasar";
 
 const axiosInstance = axios.create({
-  // baseURL: "http://172.18.20.5:4010/",
-  baseURL: "http://103.160.62.66:4010/",
+  baseURL: "http://172.18.20.5:4010/",
+  // baseURL: "http://103.160.62.66:4010/",
   timeout: 0,
 });
 

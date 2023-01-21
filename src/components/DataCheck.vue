@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-md-2">
-          <q-btn outline color="primary" label="periksa" @click="onCheck" />
+          <q-btn outline color="green-10" label="Periksa" @click="onCheck" />
         </div>
       </div>
     </q-card-section>
