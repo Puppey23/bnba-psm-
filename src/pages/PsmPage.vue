@@ -43,7 +43,7 @@ export default {
           let token = data.token;
 
           this.$q.cookies.set("token", token);
-          this.$router.push("/form-page");
+          this.$router.push("/form-psm");
         })
         .catch((e) => {
           this.isLoading = false;

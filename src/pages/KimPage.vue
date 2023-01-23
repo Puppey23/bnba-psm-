@@ -32,11 +32,6 @@ export default {
   },
   methods: {
     onclick() {
-      this.$q.notify({
-        message: "cooming soon",
-        color: "info",
-        actions: [{ icon: "close", color: "white" }],
-      });
       // this.isLoading = true;
       // this.$axios
       //   .post("/users/signin", {
@@ -48,7 +43,7 @@ export default {
       //     let token = data.token;
 
       //     this.$q.cookies.set("token", token);
-      //     this.$router.push("/form-page");
+      this.$router.push("/form-kim");
       //   })
       //   .catch((e) => {
       //     this.isLoading = false;
