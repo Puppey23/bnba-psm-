@@ -32,22 +32,22 @@ export default {
   },
   methods: {
     onclick() {
-      // this.isLoading = true;
-      // this.$axios
-      //   .post("/users/signin", {
-      //     username: "guest",
-      //     password: "justguest",
-      //   })
-      //   .then(({ data }) => {
-      //     this.isLoading = false;
-      //     let token = data.token;
+      this.isLoading = true;
+      this.$axios
+        .post("/users/signin", {
+          username: "guest",
+          password: "justguest",
+        })
+        .then(({ data }) => {
+          this.isLoading = false;
+          let token = data.token;
 
-      //     this.$q.cookies.set("token", token);
-      this.$router.push("/form-kim");
-      //   })
-      //   .catch((e) => {
-      //     this.isLoading = false;
-      //   });
+          this.$q.cookies.set("token", token);
+          this.$router.push("/form-kim");
+        })
+        .catch((e) => {
+          this.isLoading = false;
+        });
     },
   },
 };

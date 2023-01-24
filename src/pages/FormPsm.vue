@@ -338,7 +338,15 @@
 
           <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">Facebook</div>
+              <div class="text-sm font-semibold">
+                Facebook
+                <span
+                  class="text-blue float-right text-xs cursor-pointer"
+                  @click="onShowPanduan('Facebook')"
+                >
+                  Panduan Pengisian
+                </span>
+              </div>
               <q-input
                 outlined
                 v-model="form.facebook"
@@ -347,12 +355,28 @@
             </div>
 
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">Twitter</div>
+              <div class="text-sm font-semibold">
+                Twitter
+                <span
+                  class="text-blue float-right text-xs cursor-pointer"
+                  @click="onShowPanduan('Twitter')"
+                >
+                  Panduan Pengisian
+                </span>
+              </div>
               <q-input outlined v-model="form.twitter" :disable="disableForm" />
             </div>
 
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">Instagram</div>
+              <div class="text-sm font-semibold">
+                Instagram
+                <span
+                  class="text-blue float-right text-xs cursor-pointer"
+                  @click="onShowPanduan('Instagram')"
+                >
+                  Panduan Pengisian
+                </span>
+              </div>
               <q-input
                 outlined
                 v-model="form.instagram"
@@ -361,17 +385,16 @@
             </div>
 
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">Tiktok</div>
+              <div class="text-sm font-semibold">
+                Tiktok
+                <span
+                  class="text-blue float-right text-xs cursor-pointer"
+                  @click="onShowPanduan('Tiktok')"
+                >
+                  Panduan Pengisian
+                </span>
+              </div>
               <q-input outlined v-model="form.tiktok" :disable="disableForm" />
-            </div>
-          </div>
-
-          <div class="row q-pt-md">
-            <div
-              class="text-xs text-blue font-bold cursor-pointer"
-              @click="onShowPanduan"
-            >
-              Panduan Pengisian Sosial Media
             </div>
           </div>
         </q-card-section>
@@ -481,9 +504,9 @@ export default {
     verifyMethod(response) {
       this.grecaptcha.response = response;
     },
-    onShowPanduan() {
+    onShowPanduan(sosmed) {
       this.$q.dialog({
-        title: "Panduan Pengisian",
+        title: sosmed,
         component: DialogPanduan,
         parent: this,
         persisntent: true,

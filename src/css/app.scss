@@ -28,3 +28,55 @@ body {
 .bg-psm {
   background-color: #036831;
 }
+
+.img-profil-fb {
+  width: 100%;
+  @media (min-width: $medium) {
+    width: 250px;
+  }
+}
+
+.img-profil-twitter {
+  width: 100%;
+  @media (min-width: $medium) {
+    width: 250px;
+  }
+}
+
+.img-pengaturan-fb {
+  height: 300px;
+  width: auto;
+
+  @media (min-width: $medium) {
+    height: 235px;
+  }
+}
+
+.img-username-twitter {
+  @media (min-width: $medium) {
+    width: 250px;
+  }
+}
+
+.img-username-ig {
+  width: 100%;
+  @media (min-width: $medium) {
+    width: 250px;
+  }
+}
+
+.img-menu-tiktok {
+  width: 100%;
+
+  @media (min-width: $medium) {
+    width: 240px;
+  }
+}
+
+.img-nama-pengguna {
+  width: 100%;
+
+  @media (min-width: $medium) {
+    width: 500px;
+  }
+}
