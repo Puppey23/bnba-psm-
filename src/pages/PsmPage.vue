@@ -35,8 +35,8 @@ export default {
       this.isLoading = true;
       this.$axios
         .post("/users/signin", {
-          username: "guest",
-          password: "justguest",
+          username: "psm",
+          password: "Psm_20_23",
         })
         .then(({ data }) => {
           this.isLoading = false;
