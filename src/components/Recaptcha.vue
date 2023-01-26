@@ -7,7 +7,7 @@ export default {
   props: {
     id: {
       type: String,
-      default: "grecaptcha",
+      default: "id-grecaptcha",
     },
   },
   mounted() {
@@ -23,7 +23,7 @@ export default {
         sitekey: "6LcIvQAkAAAAANNzNE_E3M24CjU1rhcvZiP_w8wy",
         callback: this.verifyRecaptcha,
       });
-    }, 1000);
+    }, 3000);
   },
   methods: {
     verifyRecaptcha(response) {

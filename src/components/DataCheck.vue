@@ -8,7 +8,7 @@
 
     <q-card-section class="q-pt-md">
       <div class="row q-col-gutter-md items-center">
-        <div class="col-md-8 col-xs-8 col-sm-8">
+        <div class="col-md-5 col-xs-8 col-sm-8">
           <q-input outlined placeholder="NIK" v-model="nik">
             <template v-slot:append>
               <q-icon name="search" />
@@ -16,11 +16,11 @@
           </q-input>
         </div>
 
-        <div class="col-md-1 col-xs col-sm">
+        <div class="col-md-2">
           <q-btn outline color="primary" label="Periksa" @click="onCheck" />
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md">
           <recaptcha
             @on-validate="onValidateCaptchaCheck"
             id="grecaptcha-check"
