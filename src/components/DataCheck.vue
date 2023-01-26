@@ -8,7 +8,7 @@
 
     <q-card-section class="q-pt-md">
       <div class="row q-col-gutter-md items-center">
-        <div class="col-md col-xs-8 col-sm-8">
+        <div class="col-md-8 col-xs-8 col-sm-8">
           <q-input outlined placeholder="NIK" v-model="nik">
             <template v-slot:append>
               <q-icon name="search" />
@@ -16,8 +16,18 @@
           </q-input>
         </div>
 
-        <div class="col-md-2 col-xs col-sm">
+        <div class="col-md-1 col-xs col-sm">
           <q-btn outline color="primary" label="Periksa" @click="onCheck" />
+        </div>
+
+        <div class="col-md-2">
+          <recaptcha
+            @on-validate="onValidateCaptchaCheck"
+            id="grecaptcha-check"
+          />
+          <div v-if="grecaptchaCheck.error" class="text-red font-semibold">
+            Pastikan anda bukan robot
+          </div>
         </div>
       </div>
     </q-card-section>
@@ -84,16 +94,33 @@
 </template>
 
 <script>
+import Recaptcha from "./Recaptcha.vue";
 export default {
+  components: {
+    Recaptcha,
+  },
   data() {
     return {
       nik: "",
       visible: false,
       serverData: null,
+      grecaptchaCheck: {
+        error: false,
+        response: null,
+      },
     };
   },
   methods: {
     onCheck() {
+      this.grecaptchaCheck.error = false;
+
+      if (!this.grecaptchaCheck.response) {
+        return (this.grecaptchaCheck.error = true);
+      } else {
+        this.submit();
+      }
+    },
+    submit() {
       this.visible = true;
       this.$axios
         .post("/relawan/getonebynik", {
@@ -121,6 +148,9 @@ export default {
             this.visible = false;
           }
         });
+    },
+    onValidateCaptchaCheck(response) {
+      this.grecaptchaCheck.response = response;
     },
   },
 };

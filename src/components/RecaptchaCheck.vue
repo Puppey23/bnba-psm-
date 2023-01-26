@@ -1,15 +1,9 @@
 <template>
-  <div :id="id"></div>
+  <div id="g-recaptcha-check"></div>
 </template>
 
 <script>
 export default {
-  props: {
-    id: {
-      type: String,
-      default: "grecaptcha",
-    },
-  },
   mounted() {
     let recaptchaScript = document.createElement("script");
     recaptchaScript.setAttribute(
@@ -19,7 +13,7 @@ export default {
     document.head.appendChild(recaptchaScript);
 
     setTimeout(() => {
-      window.grecaptcha.render(this.id, {
+      window.grecaptcha.render("g-recaptcha-check", {
         sitekey: "6LcIvQAkAAAAANNzNE_E3M24CjU1rhcvZiP_w8wy",
         callback: this.verifyRecaptcha,
       });
