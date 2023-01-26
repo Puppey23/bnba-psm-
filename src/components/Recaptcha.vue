@@ -17,7 +17,7 @@ export default {
         sitekey: "6LcIvQAkAAAAANNzNE_E3M24CjU1rhcvZiP_w8wy",
         callback: this.verifyRecaptcha,
       });
-    }, 200);
+    }, 1000);
   },
   methods: {
     verifyRecaptcha(response) {

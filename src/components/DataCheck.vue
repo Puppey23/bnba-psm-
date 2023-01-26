@@ -7,8 +7,8 @@
     <q-separator inset />
 
     <q-card-section class="q-pt-md">
-      <div class="row q-gutter-md items-center">
-        <div class="col-md">
+      <div class="row q-col-gutter-md items-center">
+        <div class="col-md col-xs-8 col-sm-8">
           <q-input outlined placeholder="NIK" v-model="nik">
             <template v-slot:append>
               <q-icon name="search" />
@@ -16,7 +16,7 @@
           </q-input>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2 col-xs col-sm">
           <q-btn outline color="primary" label="Periksa" @click="onCheck" />
         </div>
       </div>

@@ -338,10 +338,10 @@
 
           <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">
+              <div class="text-sm flex justify-between font-semibold">
                 Facebook
                 <span
-                  class="text-blue float-right text-xs cursor-pointer"
+                  class="text-blue text-xs cursor-pointer"
                   @click="onShowPanduan('Facebook')"
                 >
                   Panduan Pengisian
@@ -355,10 +355,10 @@
             </div>
 
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">
+              <div class="text-sm flex justify-between font-semibold">
                 Twitter
                 <span
-                  class="text-blue float-right text-xs cursor-pointer"
+                  class="text-blue text-xs cursor-pointer"
                   @click="onShowPanduan('Twitter')"
                 >
                   Panduan Pengisian
@@ -368,10 +368,10 @@
             </div>
 
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">
+              <div class="text-sm flex justify-between font-semibold">
                 Instagram
                 <span
-                  class="text-blue float-right text-xs cursor-pointer"
+                  class="text-blue text-xs cursor-pointer"
                   @click="onShowPanduan('Instagram')"
                 >
                   Panduan Pengisian
@@ -385,10 +385,10 @@
             </div>
 
             <div class="col-12 col-md">
-              <div class="text-sm font-semibold">
+              <div class="text-sm flex justify-between font-semibold">
                 Tiktok
                 <span
-                  class="text-blue float-right text-xs cursor-pointer"
+                  class="text-blue text-xs cursor-pointer"
                   @click="onShowPanduan('Tiktok')"
                 >
                   Panduan Pengisian
