@@ -338,6 +338,56 @@
 
           <div class="row q-col-gutter-sm">
             <div class="col-12 col-md">
+              <div class="text-sm font-semibold">Tahun Bimtek Dasar</div>
+              <q-input
+                ref="rw"
+                outlined
+                type="number"
+                v-model="form.tahun_bimtek_dasar"
+                lazy-rules
+                :disable="disableForm"
+                :rules="[
+                  (val) =>
+                    (val && val.length == 4) || 'Tolong masukan 4 digit nomor',
+                ]"
+              />
+            </div>
+
+            <div class="col-12 col-md">
+              <div class="text-sm font-semibold">Tahun Bimtek Lanjutan</div>
+              <q-input
+                ref="rw"
+                outlined
+                type="number"
+                v-model="form.tahun_bimtek_lanjutan"
+                lazy-rules
+                :disable="disableForm"
+                :rules="[
+                  (val) =>
+                    (val && val.length == 4) || 'Tolong masukan 4 digit nomor',
+                ]"
+              />
+            </div>
+
+            <div class="col-12 col-md">
+              <div class="text-sm font-semibold">Tahun Bimtek Khusus</div>
+              <q-input
+                ref="rw"
+                outlined
+                type="number"
+                v-model="form.tahun_bimtek_khusus"
+                lazy-rules
+                :disable="disableForm"
+                :rules="[
+                  (val) =>
+                    (val && val.length == 4) || 'Tolong masukan 4 digit nomor',
+                ]"
+              />
+            </div>
+          </div>
+
+          <div class="row q-col-gutter-sm">
+            <div class="col-12 col-md">
               <div class="text-sm flex justify-between font-semibold">
                 Facebook
                 <span
@@ -490,6 +540,9 @@ export default {
         instagram: "",
         tiktok: "",
         alamat: "",
+        tahun_bimtek_dasar: "",
+        tahun_bimtek_lanjutan: "",
+        tahun_bimtek_khusus: "",
       },
       grecaptcha: {
         error: false,
@@ -681,6 +734,9 @@ export default {
           instagram: form.instagram,
           tiktok: form.tiktok,
           alamat: form.alamat.toUpperCase(),
+          tahun_bimtek_dasar: form.tahun_bimtek_dasar,
+          tahun_bimtek_lanjutan: form.tahun_bimtek_lanjutan,
+          tahun_bimtek_khusus: form.tahun_bimtek_khusus,
         };
 
         this.$q
@@ -754,6 +810,9 @@ export default {
         instagram: "",
         tiktok: "",
         alamat: "",
+        tahun_bimtek_dasar: "",
+        tahun_bimtek_lanjutan: "",
+        tahun_bimtek_khusus: "",
       };
 
       this.$refs.nama.resetValidation();
