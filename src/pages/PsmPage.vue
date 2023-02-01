@@ -21,13 +21,13 @@ export default {
     };
   },
   computed: {
-    metTitle() {
+    metaTitle() {
       return "PEKERJA SOSIAL MASYARAKAT (PSM)";
     },
   },
   meta() {
     return {
-      title: this.metTitle,
+      title: this.metaTitle,
     };
   },
   methods: {
