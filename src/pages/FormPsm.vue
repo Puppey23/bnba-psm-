@@ -346,9 +346,6 @@
                 v-model="form.tahun_bimtek_dasar"
                 lazy-rules
                 :disable="disableForm"
-                :rules="[
-                  (val) => val.length <= 4 || 'Tolong masukan 4 digit nomor',
-                ]"
               />
             </div>
 
@@ -361,9 +358,6 @@
                 v-model="form.tahun_bimtek_lanjutan"
                 lazy-rules
                 :disable="disableForm"
-                :rules="[
-                  (val) => val.length <= 4 || 'Tolong masukan 4 digit nomor',
-                ]"
               />
             </div>
 
@@ -376,14 +370,11 @@
                 v-model="form.tahun_bimtek_khusus"
                 lazy-rules
                 :disable="disableForm"
-                :rules="[
-                  (val) => val.length <= 4 || 'Tolong masukan 4 digit nomor',
-                ]"
               />
             </div>
           </div>
 
-          <div class="row q-col-gutter-sm">
+          <div class="row q-col-gutter-sm q-pt-md">
             <div class="col-12 col-md">
               <div class="text-sm flex justify-between font-semibold">
                 Facebook
@@ -710,6 +701,28 @@ export default {
         } else {
           formattedNoTelp = "62" + form.noTelp;
         }
+
+        if (
+          form.tahun_bimtek_dasar === "" ||
+          form.tahun_bimtek_dasar === null
+        ) {
+          form.tahun_bimtek_dasar = "0";
+        }
+
+        if (
+          form.tahun_bimtek_lanjutan === "" ||
+          form.tahun_bimtek_lanjutan === null
+        ) {
+          form.tahun_bimtek_lanjutan = "0";
+        }
+
+        if (
+          form.tahun_bimtek_khusus === "" ||
+          form.tahun_bimtek_khusus === null
+        ) {
+          form.tahun_bimtek_khusus = "0";
+        }
+
         let items = {
           nama: form.nama.toUpperCase(),
           nik: form.nik,
