@@ -347,8 +347,7 @@
                 lazy-rules
                 :disable="disableForm"
                 :rules="[
-                  (val) =>
-                    (val && val.length == 4) || 'Tolong masukan 4 digit nomor',
+                  (val) => val.length <= 4 || 'Tolong masukan 4 digit nomor',
                 ]"
               />
             </div>
@@ -363,8 +362,7 @@
                 lazy-rules
                 :disable="disableForm"
                 :rules="[
-                  (val) =>
-                    (val && val.length == 4) || 'Tolong masukan 4 digit nomor',
+                  (val) => val.length <= 4 || 'Tolong masukan 4 digit nomor',
                 ]"
               />
             </div>
@@ -379,8 +377,7 @@
                 lazy-rules
                 :disable="disableForm"
                 :rules="[
-                  (val) =>
-                    (val && val.length == 4) || 'Tolong masukan 4 digit nomor',
+                  (val) => val.length <= 4 || 'Tolong masukan 4 digit nomor',
                 ]"
               />
             </div>
@@ -540,9 +537,9 @@ export default {
         instagram: "",
         tiktok: "",
         alamat: "",
-        tahun_bimtek_dasar: "",
-        tahun_bimtek_lanjutan: "",
-        tahun_bimtek_khusus: "",
+        tahun_bimtek_dasar: "0",
+        tahun_bimtek_lanjutan: "0",
+        tahun_bimtek_khusus: "0",
       },
       grecaptcha: {
         error: false,
@@ -713,7 +710,6 @@ export default {
         } else {
           formattedNoTelp = "62" + form.noTelp;
         }
-
         let items = {
           nama: form.nama.toUpperCase(),
           nik: form.nik,
@@ -810,9 +806,9 @@ export default {
         instagram: "",
         tiktok: "",
         alamat: "",
-        tahun_bimtek_dasar: "",
-        tahun_bimtek_lanjutan: "",
-        tahun_bimtek_khusus: "",
+        tahun_bimtek_dasar: "0",
+        tahun_bimtek_lanjutan: "0",
+        tahun_bimtek_khusus: "0",
       };
 
       this.$refs.nama.resetValidation();
